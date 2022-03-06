@@ -38,3 +38,43 @@ const loadAPI = (query) => {
         error.innerText = `${error}`;
     }
 };
+// display search result
+const getSearchResult = (phones) => {
+    // if product not found
+    if (phones.length === 0) {
+        spinner.classList.remove('spinner');
+        error.innerText = 'did not founds any phone';
+    }
+    // first 20 result show
+    const firstPageResult = phones.slice(0, 20);
+    firstPageResult.forEach(phone => {
+        const createDivPhone = document.createElement('div');
+        createDivPhone.classList.add('grid-item', 'animate-bottom');
+        spinner.classList.remove('spinner');
+        createDivPhone.innerHTML = `
+            <img src="${phone.image}" alt="phone" class="avatar">
+            <p class="product-title">Phone Name: ${phone.phone_name}</p>
+            <p class="product-title">Brand: ${phone.brand}</p>
+            <button class="details-btn" onclick="getDetailsAPI('${phone.slug}')">Details</button>`;
+        container.appendChild(createDivPhone);
+    });
+    // rest of them result show
+    if (phones.length >= 21) {
+        showMoreBtn[0].style.display = 'block';
+        const showMoreResult = phones.slice(20, phones.length);
+        showMoreBtn[0].addEventListener('click', () => {
+            showMoreResult.forEach(phone => {
+            const createDiv = document.createElement('div');
+            createDiv.classList.add('grid-item', 'animate-bottom');
+            spinner.classList.remove('spinner');
+            createDiv.innerHTML = `
+                <img src="${phone.image}" alt="phone" class="avatar">
+                <p class="product-title">Phone Name: ${phone.phone_name}</p>
+                <p class="product-title">Brand: ${phone.brand}</p>
+                <button class="details-btn" onclick="getDetailsAPI('${phone.slug}')">Details</button>`;
+            container.appendChild(createDiv);
+            });
+            showMoreBtn[0].style.display = 'none';
+        });
+    }
+};
