@@ -93,3 +93,59 @@ const getDetailsAPI = (slug) => {
     // previous UI empty
     container.textContent = '';
 }
+// get details phone in single page
+const getDetailsPhone = (phone) => {
+    createDiv.classList.add('grid-item', 'animate-bottom');
+    spinner.classList.remove('spinner');
+    createDiv.innerHTML = `
+        <img src="${phone.image}" alt="phone" class="avatar">
+        <p class="product-title">Phone Name: ${phone.name}</p>
+        <p class="product-title">Brand: ${phone.brand}</p>
+        <h3>${phone.releaseDate ? phone.releaseDate : 'Release Date: Not Get'}</h3>
+        <div>
+        <h3>Main Features:</h3>
+        <table>
+        <tr>
+            <td>Storage: ${phone.mainFeatures ? phone.mainFeatures.storage : 'No'}</td>
+            <td>Chip Set: ${phone.mainFeatures ? phone.mainFeatures.chipSet : 'No'}</td>
+        </tr>
+        <tr>
+            <td>Display Size: ${phone.mainFeatures ? phone.mainFeatures.displaySize : 'No'}</td>
+            <td>Memory: ${phone.mainFeatures ? phone.mainFeatures.memory : "No"}</td>
+        </tr>
+        </table>
+        <h3>Sensors:</h3>
+        <table>
+        <tr>
+            <td>${phone.mainFeatures.sensors[0] ? phone.mainFeatures.sensors[0] : 'No'}</td>
+            <td>${phone.mainFeatures.sensors[1] ? phone.mainFeatures.sensors[1] : 'No'}</td>
+        </tr>
+        <tr>
+            <td>${phone.mainFeatures.sensors[2] ? phone.mainFeatures.sensors[2] : 'No'}</td>
+            <td>${phone.mainFeatures.sensors[3] ? phone.mainFeatures.sensors[3] : 'No'}</td>
+        </tr>
+        <tr>
+            <td>${phone.mainFeatures.sensors[4] ? phone.mainFeatures.sensors[4] : 'No'}</td>
+            <td>${phone.mainFeatures.sensors[5] ? phone.mainFeatures.sensors[5] : 'No'}</td>
+        </tr>
+        </table>
+        <h3>Others:</h3>
+        <table>
+        <tr>
+            <td>Bluetooth: ${phone.others ? phone.others.Bluetooth : 'No'}</td>
+            <td>GPS: ${phone.others ? phone.others.GPS : 'No'}</td>
+        </tr>
+        <tr>
+            <td>NFC: ${phone.others ? phone.others.NFC : 'No'}</td>
+            <td>Radio: ${phone.others ? phone.others.Radio : 'No'}</td>
+        </tr>
+        <tr>
+            <td>USB: ${phone.others ? phone.others.USB : 'No'}</td>
+            <td>WLAN: ${phone.others ? phone.others.WLAN : 'No'}</td>
+        </tr>
+        </table>
+        </div>`;  
+    container.appendChild(createDiv);
+    container.classList.add('single-page');
+    console.log(phone);
+} 
