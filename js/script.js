@@ -78,3 +78,18 @@ const getSearchResult = (phones) => {
         });
     }
 };
+// get details single phone
+const getDetailsAPI = (slug) => {
+    // spinner add
+    spinner.classList.add('spinner');
+    showMoreBtn[0].style.display = 'none';
+    try {
+        fetch(`https://openapi.programming-hero.com/api/phone/${slug}`)
+        .then(response => response.json())
+        .then(data => getDetailsPhone(data.data));
+    } catch (error) {
+        console.log(error);
+    }
+    // previous UI empty
+    container.textContent = '';
+}
